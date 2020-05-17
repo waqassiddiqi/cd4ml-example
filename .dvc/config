@@ -1,0 +1,2 @@
+['remote "azure"']
+    url = azure://ccdatalake/artifacts/dvc
