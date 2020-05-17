@@ -1,2 +1,4 @@
-['remote "azure"']
-    url = azure://ccdatalake/artifacts/dvc
+[core]
+    remote = temp
+['remote "temp"']
+    url = /Users/waqassiddiqi/Dev/temp/dvc

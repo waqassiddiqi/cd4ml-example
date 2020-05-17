@@ -1,0 +1,7 @@
+md5: 92fc21e6740e31037b0940ab678d9f15
+cmd: python src/train.py
+deps:
+- md5: e5ffad03be3b893691a97e446bdc44b9
+  path: data/output.csv
+- md5: 574539256ae7c325b953f8daf1a3fb1e
+  path: src/train.py

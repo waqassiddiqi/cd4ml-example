@@ -1,0 +1,11 @@
+name: cd4ml-example
+
+conda_env: conda.yaml
+
+entry_points:
+  main:
+    parameters:
+      alpha: {type: float, default: 0.5}
+      l1_ratio: {type: float, default: 0.1}
+    command: "dvc pull && python src/train.py {alpha} {l1_ratio}"
+
