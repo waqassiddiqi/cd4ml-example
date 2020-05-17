@@ -1,0 +1,11 @@
+md5: 57447e300c275ded62c820063fc41995
+cmd: python src/pre_process.py
+deps:
+- md5: 42583408ed18f1d97ed319888db4fbfe
+  path: src/pre_process.py
+outs:
+- md5: e5ffad03be3b893691a97e446bdc44b9
+  path: data/output.csv
+  cache: true
+  metric: false
+  persist: false
