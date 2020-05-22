@@ -1,4 +1,0 @@
-[core]
-    remote = temp
-['remote "temp"']
-    url = /Users/waqassiddiqi/Dev/temp/dvc
