@@ -46,4 +46,4 @@ jobs:
         MLFLOW_EXPRIMENT_NAME: ${{ secrets.MLFLOW_EXPRIMENT_NAME }}
 
       run: |
-        make run
+        mlflow run --experiment-name "$MLFLOW_EXPRIMENT_NAME" .
