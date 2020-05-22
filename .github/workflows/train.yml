@@ -25,6 +25,12 @@ jobs:
       with:
         python-version: '3.6'
 
+    # Setup conda
+    - name: Setup conda
+      uses: s-weigand/setup-conda@v1
+      with:
+        activate-conda: false
+
     # Install MLFlow
     - name: Install MLFlow
       run: |
