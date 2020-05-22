@@ -26,7 +26,7 @@ def eval_metrics(actual, pred):
 
 if __name__ == "__main__":
     load_dotenv()
-    MANDATORY_ENV_VARS = ["AZURE_STORAGE_ACCESS_KEY", "MLFLOW_TRACKING_URI"]
+    MANDATORY_ENV_VARS = ["MLFLOW_TRACKING_URI"]
     for var in MANDATORY_ENV_VARS:
         if var not in os.environ:
             raise EnvironmentError("Failed because {} is not set.".format(var))

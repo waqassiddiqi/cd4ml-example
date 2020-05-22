@@ -39,5 +39,11 @@ jobs:
     
     # Train model on docker container
     - name: Train model
+      env:
+        DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+        DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+        MLFLOW_TRACKING_URI: databricks
+        MLFLOW_EXPRIMENT_NAME: ${{ secrets.MLFLOW_EXPRIMENT_NAME }}
+
       run: |
-        mlflow run .
+        make run
