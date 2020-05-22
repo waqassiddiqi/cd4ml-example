@@ -75,6 +75,6 @@ if __name__ == "__main__":
 
         # Model registry does not work with file store
         if tracking_url_type_store != "file":
-            mlflow.sklearn.log_model(lr, "model", registered_model_name="MACC2.0")
+            mlflow.sklearn.log_model(lr, "model", registered_model_name="TestModel")
         else:
             mlflow.sklearn.log_model(lr, "model")
