@@ -41,7 +41,7 @@ jobs:
     
     # Train model
     - name: Train model
-      id: train
+      id: train_run
       env:
         DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
         DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
@@ -53,5 +53,7 @@ jobs:
     # Evaluate trained model
     - name: Evaluate model
       env: 
-        MLFLOW_TRAIN_RUN_ID: ${{steps.train.outputs.train}}
-      run: printenv
+        MLFLOW_TRAIN_RUN_ID: ${{ steps.train_run.outputs.run_id }}
+      run: |
+        printenv
+        make evaluate
