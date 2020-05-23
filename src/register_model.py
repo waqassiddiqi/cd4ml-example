@@ -10,5 +10,5 @@ if __name__ == "__main__":
     train_run_id = sys.argv[1]
     model_name = sys.argv[2]
 
-    result = mlflow.register_model("runs:/" + train_run_id + "/artifacts/model", model_name)
+    result = mlflow.register_model("runs:/" + train_run_id + "/model", model_name)
     print(result)
