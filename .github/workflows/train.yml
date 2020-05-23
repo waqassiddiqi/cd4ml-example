@@ -60,5 +60,6 @@ jobs:
         MLFLOW_TRAIN_RUN_ID: ${{ steps.train_run.outputs.run_id }}
       run: |
         pip install scikit-learn==0.19.1
+        pip install scipy
         pip install cloudpickle==1.4.1
         make evaluate
