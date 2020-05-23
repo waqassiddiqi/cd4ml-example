@@ -22,6 +22,7 @@ jobs:
     
     # Setup python
     - name: Setup Python
+      id: python
       uses: actions/setup-python@v1
       with:
         python-version: '3.6'
@@ -34,11 +35,13 @@ jobs:
 
     # Install MLFlow
     - name: Install MLFlow
+      id: mlflow
       run: |
         pip install mlflow
     
     # Train model
     - name: Train model
+      id: train
       env:
         DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
         DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
@@ -50,5 +53,5 @@ jobs:
     # Evaluate trained model
     - name: Evaluate model
       env: 
-        MLFLOW_TRAIN_RUN_ID: ${{steps.run_tests.outputs.train}}
-      run: echo ${MLFLOW_TRAIN_RUN_ID}
+        MLFLOW_TRAIN_RUN_ID: ${{steps.train.outputs.train}}
+      run: printenv
