@@ -53,6 +53,10 @@ jobs:
     # Evaluate trained model
     - name: Evaluate model
       env: 
+        DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+        DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+        MLFLOW_TRACKING_URI: databricks
+        MLFLOW_EXPRIMENT_NAME: ${{ secrets.MLFLOW_EXPRIMENT_NAME }}
         MLFLOW_TRAIN_RUN_ID: ${{ steps.train_run.outputs.run_id }}
       run: |
         printenv
