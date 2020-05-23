@@ -1,10 +1,10 @@
 import mlflow.sklearn
 import pandas as pd
 import os
+import sys
 import numpy as np
 
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
-from dotenv import load_dotenv
 
 def eval_metrics(actual, pred):
     rmse = np.sqrt(mean_squared_error(actual, pred))
@@ -13,8 +13,10 @@ def eval_metrics(actual, pred):
     return rmse, mae, r2
 
 if __name__ == "__main__":
-    load_dotenv()
-    MANDATORY_ENV_VARS = ["MLFLOW_RUN_ID"]
+    if len(sys.argv) == 0:
+        raise ValueError("Run ID is missing")
+
+    train_run_id = sys.argv[1]
 
     try:
         data = pd.read_csv("data/output.csv", sep=',')
@@ -22,7 +24,7 @@ if __name__ == "__main__":
         logger.exception(
             "output.csv file not found, run dvc repro preprocess.dvc first. Error: %s", e)
 
-    model = mlflow.sklearn.load_model("runs:/" + os.environ["MLFLOW_RUN_ID"] + "/model")
+    model = mlflow.sklearn.load_model("runs:/" + train_run_id + "/model")
 
     # test data
     test_quality = data.quality
@@ -31,6 +33,10 @@ if __name__ == "__main__":
     # predictions
     predictions = model.predict(test)
     (rmse, mae, r2) = eval_metrics(test_quality, predictions)
+    
+    print("  RMSE: %s" % rmse)
+    print("  MAE: %s" % mae)
+    print("  R2: %s" % r2)
 
     # check model passess baseline
     if rmse < 0.5:

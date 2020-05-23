@@ -44,11 +44,12 @@ jobs:
         DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         MLFLOW_TRACKING_URI: databricks
         MLFLOW_EXPRIMENT_NAME: ${{ secrets.MLFLOW_EXPRIMENT_NAME }}
-
       run: |
         make train
 
     # Evaluate trained model
     - name: Evaluate model
+      env: 
+        MLFLOW_TRAIN_RUN_ID: ${MLFLOW_RUN_ID}
       run: |
         make evaluate
