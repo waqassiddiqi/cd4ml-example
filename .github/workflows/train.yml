@@ -46,6 +46,8 @@ jobs:
         MLFLOW_EXPRIMENT_NAME: ${{ secrets.MLFLOW_EXPRIMENT_NAME }}
       run: |
         make train
+        echo ${MLFLOW_RUN_ID}
+        printenv
 
     # Evaluate trained model
     - name: Evaluate model
