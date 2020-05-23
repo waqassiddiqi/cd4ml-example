@@ -45,12 +45,10 @@ jobs:
         MLFLOW_TRACKING_URI: databricks
         MLFLOW_EXPRIMENT_NAME: ${{ secrets.MLFLOW_EXPRIMENT_NAME }}
       run: |
-        make train
-        echo ${MLFLOW_RUN_ID}
-        printenv
+        echo "::set-output name=train::$(make train)"
 
     # Evaluate trained model
     - name: Evaluate model
       env: 
-        MLFLOW_TRAIN_RUN_ID: ${MLFLOW_RUN_ID}
-      run: echo ${MLFLOW_RUN_ID} && echo ${MLFLOW_TRAIN_RUN_ID}
+        MLFLOW_TRAIN_RUN_ID: ${{steps.run_tests.outputs.train}}
+      run: echo ${MLFLOW_TRAIN_RUN_ID}
