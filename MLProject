@@ -8,4 +8,6 @@ entry_points:
       alpha: {type: float, default: 0.5}
       l1_ratio: {type: float, default: 0.1}
     command: "python src/pre_process.py && python src/train.py {alpha} {l1_ratio}"
+  evaluate:
+    command: "python src/evaluate.py"
 

@@ -37,7 +37,7 @@ jobs:
       run: |
         pip install mlflow
     
-    # Train model on docker container
+    # Train model
     - name: Train model
       env:
         DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
@@ -46,4 +46,9 @@ jobs:
         MLFLOW_EXPRIMENT_NAME: ${{ secrets.MLFLOW_EXPRIMENT_NAME }}
 
       run: |
-        mlflow run --experiment-name "${MLFLOW_EXPRIMENT_NAME}" .
+        make train
+
+    # Evaluate trained model
+    - name: Evaluate model
+      run: |
+        make evaluate
