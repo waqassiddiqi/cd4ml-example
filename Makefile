@@ -8,3 +8,6 @@ train:
 
 evaluate:
 	export MLFLOW_TRACKING_URI=${MLFLOW_TRACKING_URI} && python src/evaluate.py ${MLFLOW_TRAIN_RUN_ID}
+
+register-model:
+	export MLFLOW_TRACKING_URI=${MLFLOW_TRACKING_URI} && python src/register_model.py ${MLFLOW_TRAIN_RUN_ID} ${MLFLOW_MODEL_NAME}
