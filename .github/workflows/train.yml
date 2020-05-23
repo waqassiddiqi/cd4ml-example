@@ -48,7 +48,7 @@ jobs:
         MLFLOW_TRACKING_URI: databricks
         MLFLOW_EXPRIMENT_NAME: ${{ secrets.MLFLOW_EXPRIMENT_NAME }}
       run: |
-        echo "::set-output name=train::$(make train)"
+        make train
 
     # Evaluate trained model
     - name: Evaluate model
