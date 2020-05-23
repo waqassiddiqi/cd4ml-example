@@ -75,3 +75,6 @@ if __name__ == "__main__":
 
         # log model
         mlflow.sklearn.log_model(lr, "model")
+
+        # set current run id for next step of pipleline
+        os.environ["MLFLOW_TRAIN_RUN_ID"] = mlflow.active_run().info.run_id
