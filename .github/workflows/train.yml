@@ -51,5 +51,5 @@ jobs:
     - name: Evaluate model
       env: 
         MLFLOW_TRAIN_RUN_ID: ${MLFLOW_RUN_ID}
-      run: |
-        make evaluate
+    - run: echo ${MLFLOW_RUN_ID}
+    - run: echo ${MLFLOW_TRAIN_RUN_ID}
