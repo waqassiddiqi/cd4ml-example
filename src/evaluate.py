@@ -19,7 +19,7 @@ if __name__ == "__main__":
     train_run_id = sys.argv[1]
 
     try:
-        data = pd.read_csv("data/output.csv", sep=',')
+        data = pd.read_csv("data/output_validate.csv", sep=',')
     except Exception as e:
         logger.exception(
             "output.csv file not found, run dvc repro preprocess.dvc first. Error: %s", e)

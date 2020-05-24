@@ -1,7 +1,7 @@
 -include .env
 
-dvc-repro:
-	dvc repro train.dvc
+dvc-repro-preprocess:
+	dvc repro preprocess.dvc
 
 train: 
 	export MLFLOW_TRACKING_URI=${MLFLOW_TRACKING_URI} && mlflow run --experiment-name "${MLFLOW_EXPRIMENT_NAME}" .

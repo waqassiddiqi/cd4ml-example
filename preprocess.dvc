@@ -1,0 +1,13 @@
+md5: 73f975b640eb331d4cb05b1157eca857
+cmd: python src/pre_process.py
+outs:
+- md5: d7b45fc8bce58765a46dba423c89a623
+  path: data/output.csv
+  cache: true
+  metric: false
+  persist: false
+- md5: 61a153120d44701a50b0eb8bda7af78d
+  path: data/output_validate.csv
+  cache: true
+  metric: false
+  persist: false
