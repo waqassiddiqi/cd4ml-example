@@ -1,1 +1,7 @@
 script: train.py
+
+# cluster to run training on
+target: train-dev
+
+# framework to use for training
+framework: Python
