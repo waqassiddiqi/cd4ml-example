@@ -32,6 +32,8 @@ def main(args):
     # load azure ml workspace and set MLflow tracking uri
     ws = Workspace.from_config()
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
+    experiment_name = 'experiment_with_mlflow'
+    mlflow.set_experiment(experiment_name)
 
     warnings.filterwarnings("ignore")
     np.random.seed(40)
