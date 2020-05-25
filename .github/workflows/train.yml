@@ -7,8 +7,7 @@ name: CI
 on: 
   push:
     branches:
-      - without-dvc
-      - playground
+      - mlflow-azureml
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -20,58 +19,23 @@ jobs:
       id: checkout_repo
       uses: actions/checkout@v2
     
-    # Setup python
-    - name: Setup Python
-      id: python
-      uses: actions/setup-python@v1
+    # Connect or Create the Azure Machine Learning Workspace
+    - name: Connect/Create Azure Machine Learning Workspace
+      id: aml_workspace
+      uses: Azure/aml-workspace@v1
       with:
-        python-version: '3.6'
+          azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
 
-    # Setup conda
-    - name: Setup conda
-      uses: s-weigand/setup-conda@v1
+    # Connect or Create a Compute Target in Azure Machine Learning
+    - name: Connect/Create Azure Machine Learning Compute Target
+      id: aml_compute_training
+      uses: Azure/aml-compute@v1
       with:
-        activate-conda: false
+          azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
 
-    # Install MLFlow
-    - name: Install MLFlow
-      id: mlflow
-      run: |
-        pip install mlflow
-    
-    # Train model
-    - name: Train model
-      id: train_run
-      env:
-        DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
-        DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-        MLFLOW_TRACKING_URI: databricks
-        MLFLOW_EXPRIMENT_NAME: ${{ secrets.MLFLOW_EXPRIMENT_NAME }}
-      run: |
-        make train
-
-    # Evaluate trained model
-    - name: Evaluate model
-      env: 
-        DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
-        DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-        MLFLOW_TRACKING_URI: databricks
-        MLFLOW_EXPRIMENT_NAME: ${{ secrets.MLFLOW_EXPRIMENT_NAME }}
-        MLFLOW_TRAIN_RUN_ID: ${{ steps.train_run.outputs.run_id }}
-      run: |
-        pip install scikit-learn==0.19.1
-        pip install scipy
-        pip install cloudpickle==1.4.1
-        make evaluate
-
-    # Register trained model
-    - name: Register model
-      env: 
-        DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
-        DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-        MLFLOW_TRACKING_URI: databricks
-        MLFLOW_EXPRIMENT_NAME: ${{ secrets.MLFLOW_EXPRIMENT_NAME }}
-        MLFLOW_TRAIN_RUN_ID: ${{ steps.train_run.outputs.run_id }}
-        MLFLOW_MODEL_NAME: TemplateModel
-      run: |
-        make register-model
+    # Submit a training run to the Azure Machine Learning
+    - name: Submit training run
+      id: aml_run
+      uses: Azure/aml-run@v1
+      with:
+          azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}

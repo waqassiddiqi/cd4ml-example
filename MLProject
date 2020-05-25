@@ -7,9 +7,9 @@ entry_points:
     parameters:
       alpha: {type: float, default: 0.5}
       l1_ratio: {type: float, default: 0.1}
-    command: "python src/pre_process.py && python src/train.py {alpha} {l1_ratio}"
+    command: "python code/pre_process.py && python code/train.py {alpha} {l1_ratio}"
   evaluate:
     parameters:
       run_id: {type: string}
-    command: "python src/evaluate.py {run_id}"
+    command: "python code/evaluate.py {run_id}"
 

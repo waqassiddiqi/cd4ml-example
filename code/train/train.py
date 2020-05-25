@@ -13,6 +13,8 @@ from urllib.parse import urlparse
 import mlflow
 import mlflow.sklearn
 
+from azureml.core import Workspace, Dataset
+
 import logging
 logging.basicConfig(level=logging.WARN)
 logger = logging.getLogger(__name__)
@@ -26,19 +28,20 @@ def eval_metrics(actual, pred):
 
 if __name__ == "__main__":
     load_dotenv()
-    MANDATORY_ENV_VARS = ["MLFLOW_TRACKING_URI"]
-    for var in MANDATORY_ENV_VARS:
-        if var not in os.environ:
-            raise EnvironmentError("Failed because {} is not set.".format(var))
+
+    # load azure ml workspace and set MLflow tracking uri
+    ws = Workspace.from_config()
+    mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
+
     warnings.filterwarnings("ignore")
     np.random.seed(40)
 
-    # Read output.csv data
+    # Get data from Azure ML workspace Dataset
     try:
-        data = pd.read_csv("data/output.csv", sep=',')
+        data = Dataset.get_by_name(workspace=ws, name="WineQualityRedDS").to_pandas_dataframe()
     except Exception as e:
         logger.exception(
-            "output.csv file not found, run dvc repro preprocess.dvc first. Error: %s", e)
+            "WineQualityRedDS data set not found please check Datasets in Azure ML workspace. Error: %s", e)
 
     # Split the data into training and test sets. (0.75, 0.25) split.
     train, test = train_test_split(data)
@@ -75,7 +78,3 @@ if __name__ == "__main__":
 
         # log model
         mlflow.sklearn.log_model(lr, "model")
-
-        # set current run id for next step of pipleline
-        print(mlflow.active_run().info.run_id)
-        print(f"::set-output name=run_id::{mlflow.active_run().info.run_id}")

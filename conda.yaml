@@ -1,4 +1,4 @@
-name: tutorial
+name: template_env
 channels:
   - defaults
   - anaconda
@@ -8,7 +8,6 @@ dependencies:
   - scikit-learn=0.19.1
   - pip:
     - mlflow>=1.0
-    - azure-core==1.5.0
-    - azure-storage-blob==12.3.1
+    - azureml-defaults==1.1.5
+    - azureml-dataprep[pandas,fuse]==1.4.0
     - python-dotenv==0.13.0
-    - dvc==0.94.0
