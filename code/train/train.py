@@ -26,7 +26,7 @@ def eval_metrics(actual, pred):
     r2 = r2_score(actual, pred)
     return rmse, mae, r2
 
-if __name__ == "__main__":
+def main(args):
     load_dotenv()
 
     # load azure ml workspace and set MLflow tracking uri
@@ -78,3 +78,6 @@ if __name__ == "__main__":
 
         # log model
         mlflow.sklearn.log_model(lr, "model")
+
+if __name__ == '__main__':
+    main(args=[])
