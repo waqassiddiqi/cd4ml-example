@@ -5,3 +5,6 @@ target: train-dev
 
 # framework to use for training
 framework: Python
+
+# nodes to use for training
+nodeCount: 1
