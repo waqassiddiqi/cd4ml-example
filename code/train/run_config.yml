@@ -1,17 +1,59 @@
+# The script to run.
 script: train.py
-
-# cluster to run training on
+# The arguments to the script file.
+arguments: [
+  "--kernel", "linear",
+  "--penalty", 1.0
+]
+# The name of the compute target to use for this run.
 target: train-dev
-
-# framework to use for training
+# Framework to execute inside. Allowed values are "Python", "PySpark", "CNTK", "TensorFlow", and "PyTorch".
 framework: Python
-
-# nodes to use for training
+# Communicator for the given framework. Allowed values are "None", "ParameterServer", "OpenMpi", and "IntelMpi".
+communicator: None
+# Maximum allowed duration for the run.
+maxRunDurationSeconds:
+# Number of nodes to use for running job.
 nodeCount: 1
-
+# Environment details.
 environment:
+  # Environment name
   name: data_gen_environment
+  # Environment version
+  version:
+  # Environment variables set for the run.
+  environmentVariables:
+  # Python details
   python:
+    # user_managed_dependencies=True indicates that the environmentwill be user managed. False indicates that AzureML willmanage the user environment.
     userManagedDependencies: false
+    # The python interpreter path
     interpreterPath: python
+    # Path to the conda dependencies file to use for this run. If a project
+    # contains multiple programs with different sets of dependencies, it may be
+    # convenient to manage those environments with separate files.
     condaDependenciesFile: environment.yml
+    # The base conda environment used for incremental environment creation.
+    baseCondaEnvironment:
+  # Docker details
+  docker:
+    # Set True to perform this run inside a Docker container.
+    enabled: true
+    # Base image used for Docker-based runs. Mutually exclusive with base_dockerfile.
+    baseImage: mcr.microsoft.com/azureml/base:intelmpi2018.3-ubuntu16.04
+    # Base Dockerfile used for Docker-based runs. Mutually exclusive with base_image
+    baseDockerfile:
+    # Set False if necessary to work around shared volume bugs.
+    sharedVolumes: true
+    # Shared memory size for Docker container. Default is 2g.
+    shmSize: 2g
+# History details.
+history:
+  # Enable history tracking -- this allows status, logs, metrics, and outputs
+  # to be collected for a run.
+  outputCollection: true
+  # Whether to take snapshots for history.
+  snapshotProject: true
+  # Directories to sync with FileWatcher.
+  directoriesToWatch:
+  - logs
