@@ -8,3 +8,10 @@ framework: Python
 
 # nodes to use for training
 nodeCount: 1
+
+environment:
+  name: data_gen_environment
+  python:
+    userManagedDependencies: false
+    interpreterPath: python
+    condaDependenciesFile: environment.yml

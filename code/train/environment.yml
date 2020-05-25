@@ -1,0 +1,13 @@
+name: template_env
+channels:
+  - defaults
+  - anaconda
+  - conda-forge
+dependencies:
+  - python=3.6
+  - scikit-learn=0.19.1
+  - pip:
+    - mlflow>=1.0
+    - azureml-defaults==1.1.5
+    - azureml-dataprep[pandas,fuse]==1.4.0
+    - python-dotenv==0.13.0
