@@ -48,6 +48,7 @@ def main(args):
 
     print(dir(ws))
     print(dir(mlflow))
+    print(mlflow.get_tracking_uri())
 
     # Get data from Azure ML workspace Dataset
     try:
