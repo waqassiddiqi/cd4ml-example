@@ -30,7 +30,7 @@ def eval_metrics(actual, pred):
 
 def main(args):
     load_dotenv()
-    train_on_local = os.environ["TRAIN_LOCAL"] == "True"
+    train_on_local = os.environ.get("TRAIN_LOCAL") is not None and os.environ["TRAIN_LOCAL"] == "True"
 
     warnings.filterwarnings("ignore")
     np.random.seed(40)
