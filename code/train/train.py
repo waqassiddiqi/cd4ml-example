@@ -49,8 +49,6 @@ def main(args):
     except Exception as e:
         logger.exception(
             "WineQualityRedDS data set not found please check Datasets in Azure ML workspace. Error: %s", e)
-    print(data)
-
     data.fillna(data.mean(), inplace=True)
 
     # Split the data into training and test sets. (0.75, 0.25) split.
@@ -64,7 +62,7 @@ def main(args):
 
     alpha = float(sys.argv[1]) if len(sys.argv) > 1 else 0.5
     l1_ratio = float(sys.argv[2]) if len(sys.argv) > 2 else 0.5
-    print(alpha, l1_ratio)
+    
     with mlflow.start_run():
         lr = ElasticNet(alpha=alpha, l1_ratio=l1_ratio, random_state=42)
         lr.fit(train_x, train_y)
