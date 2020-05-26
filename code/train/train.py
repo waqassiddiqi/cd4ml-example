@@ -45,8 +45,9 @@ def main(args):
         print(run)
         ws = run.experiment.workspace
         print(ws)
-    
-    print(mlflow.get_mlflow_tracking_uri(ws))
+
+    print(dir(ws))
+    print(dir(mlflow))
 
     # Get data from Azure ML workspace Dataset
     try:
