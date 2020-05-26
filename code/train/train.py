@@ -26,11 +26,12 @@ def eval_metrics(actual, pred):
     r2 = r2_score(actual, pred)
     return rmse, mae, r2
 
+
 def main(args):
     load_dotenv()
 
     # load azure ml workspace and set MLflow tracking uri
-    ws = Workspace.from_config()
+    ws = Workspace.get("cc-ml-dev", resource_group="cc-dataplatform-dev")
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
     experiment_name = 'experiment_with_mlflow'
     mlflow.set_experiment(experiment_name)
@@ -80,6 +81,7 @@ def main(args):
 
         # log model
         mlflow.sklearn.log_model(lr, "model")
+
 
 if __name__ == '__main__':
     main(args=[])
