@@ -30,10 +30,13 @@ def eval_metrics(actual, pred):
 
 def main(args):
     load_dotenv()
-    print(os.environ)
 
     warnings.filterwarnings("ignore")
     np.random.seed(40)
+
+    run = Run.get_context()
+    ws = run.experiment.workspace
+    print(ws)
 
     # Get data from Azure ML workspace Dataset
     try:
