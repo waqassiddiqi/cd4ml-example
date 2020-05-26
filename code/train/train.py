@@ -13,7 +13,8 @@ from urllib.parse import urlparse
 import mlflow
 import mlflow.sklearn
 
-from azureml.core import Workspace, Dataset
+from azureml.core import Run, Workspace, Dataset
+from azureml.core.authentication import ServicePrincipalAuthentication
 
 import logging
 logging.basicConfig(level=logging.WARN)
@@ -30,11 +31,6 @@ def eval_metrics(actual, pred):
 def main(args):
     load_dotenv()
     print(os.environ)
-    # load azure ml workspace and set MLflow tracking uri
-    ws = Workspace.get("cc-ml-dev", resource_group="cc-dataplatform-dev")
-    mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
-    experiment_name = 'experiment_with_mlflow'
-    mlflow.set_experiment(experiment_name)
 
     warnings.filterwarnings("ignore")
     np.random.seed(40)
