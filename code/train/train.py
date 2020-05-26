@@ -30,13 +30,18 @@ def eval_metrics(actual, pred):
 
 def main(args):
     load_dotenv()
+    train_on_local = os.environ["TRAIN_LOCAL"] == "True"
 
     warnings.filterwarnings("ignore")
     np.random.seed(40)
 
-    run = Run.get_context()
-    ws = run.experiment.workspace
-    print(ws)
+    if(train_on_local == True):
+        ws = Workspace.get(os.environ["AZURE_ML_WORKSPACE_NAME"], 
+        subscription_id=os.environ["AZURE_ML_SUBSCRIPTION_ID"], 
+        resource_group=os.environ["AZURE_RESOURCE_GROUP"])
+    else:
+        run = Run.get_context()
+        ws = run.experiment.workspace
 
     # Get data from Azure ML workspace Dataset
     try:
@@ -44,6 +49,9 @@ def main(args):
     except Exception as e:
         logger.exception(
             "WineQualityRedDS data set not found please check Datasets in Azure ML workspace. Error: %s", e)
+    print(data)
+
+    data.fillna(data.mean(), inplace=True)
 
     # Split the data into training and test sets. (0.75, 0.25) split.
     train, test = train_test_split(data)
@@ -56,7 +64,7 @@ def main(args):
 
     alpha = float(sys.argv[1]) if len(sys.argv) > 1 else 0.5
     l1_ratio = float(sys.argv[2]) if len(sys.argv) > 2 else 0.5
-
+    print(alpha, l1_ratio)
     with mlflow.start_run():
         lr = ElasticNet(alpha=alpha, l1_ratio=l1_ratio, random_state=42)
         lr.fit(train_x, train_y)
