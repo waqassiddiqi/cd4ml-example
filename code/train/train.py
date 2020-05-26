@@ -29,7 +29,7 @@ def eval_metrics(actual, pred):
 
 def main(args):
     load_dotenv()
-
+    print(os.environ)
     # load azure ml workspace and set MLflow tracking uri
     ws = Workspace.get("cc-ml-dev", resource_group="cc-dataplatform-dev")
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
