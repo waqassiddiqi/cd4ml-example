@@ -18,7 +18,7 @@ if __name__ == "__main__":
             raise EnvironmentError("Failed because {} is not set.".format(var))
 
     azure_workspace = Workspace.create(name=os.environ["AZURE_ML_WORKSPACE_NAME"],
-                                       subscription_id=os.environ["AZURE_SUBSCRIPTION_ID"],
+                                       subscription_id=os.environ["AZURE_ML_SUBSCRIPTION_ID"],
                                        resource_group=os.environ["AZURE_RESOURCE_GROUP"],
                                        location="southeastasia",
                                        create_resource_group=False,
