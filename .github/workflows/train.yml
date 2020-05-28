@@ -78,7 +78,10 @@ jobs:
 
     # Deploy trained model
     - name: Deploy model
-      env: 
+      env:
+        AZURE_ML_SERVICE_PRINCIPAL_ID: ${{ secrets.AZURE_ML_SERVICE_PRINCIPAL_ID }}
+        AZURE_ML_SERVICE_PRINCIPAL_PASSWORD: ${{ secrets.AZURE_ML_SERVICE_PRINCIPAL_PASSWORD }}
+        AZURE_ML_TENANT_ID: ${{ secrets.AZURE_ML_TENANT_ID }}
         AZURE_ML_WORKSPACE_NAME: ${{ secrets.AZURE_ML_WORKSPACE_NAME }}
         AZURE_RESOURCE_GROUP: ${{ secrets.AZURE_RESOURCE_GROUP }}
         AZURE_ML_SUBSCRIPTION_ID: ${{ secrets.AZURE_ML_SUBSCRIPTION_ID }}
