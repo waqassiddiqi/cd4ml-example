@@ -1,3 +1,5 @@
+import sys
+import os
 import mlflow.azureml
 from azureml.core import Workspace
 from azureml.core.webservice import AciWebservice, Webservice
@@ -5,7 +7,7 @@ from azureml.core.webservice import AciWebservice, Webservice
 if __name__ == "__main__":
     if len(sys.argv) == 0:
         raise ValueError("Usage: python deploy_model.py <run_id> <model_name>")
-
+        
     train_run_id = sys.argv[1]
     model_name = sys.argv[2]
 
@@ -23,6 +25,7 @@ if __name__ == "__main__":
                                        exist_okay=True)
 
     model_path = "runs:/" + train_run_id + "/model"
+    
     azure_image, azure_model = mlflow.azureml.build_image(model_uri=model_path,
                                                           workspace=azure_workspace,
                                                           description=model_name,

@@ -83,6 +83,8 @@ jobs:
         AZURE_RESOURCE_GROUP: ${{ secrets.AZURE_RESOURCE_GROUP }}
         AZURE_ML_SUBSCRIPTION_ID: ${{ secrets.AZURE_ML_SUBSCRIPTION_ID }}
         MLFLOW_TRACKING_URI: databricks
+        DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+        DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         MLFLOW_EXPRIMENT_NAME: ${{ secrets.MLFLOW_EXPRIMENT_NAME }}
         MLFLOW_TRAIN_RUN_ID: ${{ steps.train_run.outputs.run_id }}
         MLFLOW_MODEL_NAME: TemplateModel
