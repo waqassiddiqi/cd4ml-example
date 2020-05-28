@@ -10,3 +10,4 @@ dependencies:
     - mlflow>=1.0
     - python-dotenv==0.13.0
     - dvc[azure]
+    - azureml-sdk
