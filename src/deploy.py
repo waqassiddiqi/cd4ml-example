@@ -25,7 +25,7 @@ if __name__ == "__main__":
 
     azure_workspace = Workspace.get(os.environ["AZURE_ML_WORKSPACE_NAME"], 
         subscription_id=os.environ["AZURE_ML_SUBSCRIPTION_ID"], 
-        resource_group=os.environ["AZURE_RESOURCE_GROUP"]
+        resource_group=os.environ["AZURE_RESOURCE_GROUP"],
         auth=svc_pr)
 
     model_path = "runs:/" + train_run_id + "/model"
