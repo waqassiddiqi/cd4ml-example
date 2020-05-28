@@ -20,7 +20,7 @@ if __name__ == "__main__":
             raise EnvironmentError("Failed because {} is not set.".format(var))
 
     svc_pr = ServicePrincipalAuthentication(tenant_id=os.environ["AZURE_ML_TENANT_ID"], 
-        service_principal_id=["AZURE_ML_SERVICE_PRINCIPAL_ID"], 
+        service_principal_id=os.environ["AZURE_ML_SERVICE_PRINCIPAL_ID"], 
         service_principal_password=os.environ["AZURE_ML_SERVICE_PRINCIPAL_PASSWORD"])
 
     azure_workspace = Workspace.get(os.environ["AZURE_ML_WORKSPACE_NAME"], 
