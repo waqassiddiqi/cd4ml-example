@@ -57,5 +57,3 @@ jobs:
           azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
           model_name:  ${{ steps.aml_registermodel.outputs.model_name }}
           model_version: ${{ steps.aml_registermodel.outputs.model_version }}
-      run:
-        printenv
