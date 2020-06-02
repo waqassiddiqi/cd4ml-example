@@ -10,6 +10,7 @@ from mlflow.pyfunc.scoring_server import parse_json_input, _get_jsonable_obj
 
 def init():
     print(os.environ)
+    print(os.listdir("."))
     global model
 
 
