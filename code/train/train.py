@@ -39,16 +39,9 @@ def main(args):
         ws = Workspace.get(os.environ["AZURE_ML_WORKSPACE_NAME"], 
         subscription_id=os.environ["AZURE_ML_SUBSCRIPTION_ID"], 
         resource_group=os.environ["AZURE_RESOURCE_GROUP"])
-
     else:
         run = Run.get_context()
-        print(run)
         ws = run.experiment.workspace
-        print(ws)
-
-    print(dir(ws))
-    print(dir(mlflow))
-    print(mlflow.get_tracking_uri())
 
     # Get data from Azure ML workspace Dataset
     try:
