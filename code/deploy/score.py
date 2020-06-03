@@ -18,7 +18,7 @@ def init():
    global model
    model = load_model(os.path.join(os.environ.get("AZUREML_MODEL_DIR"), "model"))
 
-@input_schema('data', NumpyParameterType(np.array([[8.8, 0.045, 0.36, 1.001, 7, 45, 3, 20.7, 0.45, 170, 0.27]])))
+@input_schema('json_input', NumpyParameterType(np.array([[8.8, 0.045, 0.36, 1.001, 7, 45, 3, 20.7, 0.45, 170, 0.27]])))
 @output_schema(StandardPythonParameterType({'predict': [[5.10845888]]}))
 def run(json_input):
     input_df = parse_json_input(json_input=json_input, orient="split")
