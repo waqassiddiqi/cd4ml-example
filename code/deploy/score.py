@@ -18,14 +18,14 @@ def init():
    global model
    model = load_model(os.path.join(os.environ.get("AZUREML_MODEL_DIR"), "model"))
 
-@input_schema('data', NumpyParameterType(np.array([[8.8, 0.045, 0.36, 1.001, 7, 45, 3, 20.7, 0.45, 170, 0.27]])))
-@output_schema(StandardPythonParameterType({'predict': [[5.10845888]]}))
+#@input_schema('data', NumpyParameterType(np.array([[8.8, 0.045, 0.36, 1.001, 7, 45, 3, 20.7, 0.45, 170, 0.27]])))
+#@output_schema(StandardPythonParameterType({'predict': [[5.10845888]]}))
 def run(data):
    print(data)
    input_df = parse_json_input(json_input=data, orient="split")
    result = _get_jsonable_obj(model.predict(input_df), pandas_orient="records")
    
-   inputs_dc.collect(input_df)
-   prediction_dc.collect(result)
+   #inputs_dc.collect(input_df)
+   #prediction_dc.collect(result)
    
    return result
