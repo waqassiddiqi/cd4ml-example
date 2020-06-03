@@ -16,7 +16,8 @@ from mlflow.pyfunc.scoring_server import parse_json_input, _get_jsonable_obj
 
 def init():
    global model
-   model = load_model(os.environ.get("AZUREML_MODEL_DIR"))
+   os.listdir(os.environ.get("AZUREML_MODEL_DIR"))
+   # model = load_model(os.environ.get("AZUREML_MODEL_DIR"))
 
 @input_schema('data', NumpyParameterType(np.array([[0.1, 1.2, 2.3, 3.4]])))
 @output_schema(StandardPythonParameterType({'predict': [['Iris-virginica']]}))
