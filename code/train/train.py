@@ -1,7 +1,7 @@
 import os
 import warnings
 import sys
-
+import time
 from dotenv import load_dotenv
 
 import pandas as pd
@@ -42,9 +42,10 @@ def main(args):
     else:
         run = Run.get_context()
         ws = run.experiment.workspace
-
+    start_time = time.time()
     # Get data from Azure ML workspace Dataset
     d_apps = Dataset.get_by_name(ws, name='applications').to_pandas_dataframe()
+    print(f'Loaded applications in {(time.time() - start_time):.2f}s')
     try:
         data = Dataset.get_by_name(workspace=ws, name="WineQualityRedDS").to_pandas_dataframe()
     except Exception as e:
