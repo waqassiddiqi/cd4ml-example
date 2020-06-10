@@ -44,6 +44,7 @@ def main(args):
         ws = run.experiment.workspace
 
     # Get data from Azure ML workspace Dataset
+    d_apps = Dataset.get_by_name(ws, name='applications').to_pandas_dataframe()
     try:
         data = Dataset.get_by_name(workspace=ws, name="WineQualityRedDS").to_pandas_dataframe()
     except Exception as e:
