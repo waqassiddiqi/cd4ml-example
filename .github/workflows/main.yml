@@ -6,14 +6,12 @@ on:
     
 jobs:
   build:
-    if: startsWith(github.event.comment.body, '/build') && ${{ github.event.issue.pull_request }}
+    if: startsWith(github.event.comment.body, '/build')
     runs-on: ubuntu-latest
     steps:
       - uses: hmarr/debug-action@v2
-      - name: print comment
-        run: echo "${{github.event.comment.body}}"
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
+      - name: Normalise command
         run: |
-          echo "$GITHUB_CONTEXT"
+          COMMAND=${{github.event.comment.body#"/build"}}
+          echo $COMMAND
+      
