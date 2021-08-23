@@ -10,5 +10,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: print comment
-        run: echo "${{github.event.issue.comment}}"
+        run: echo "${{github.event.issue}}"
     
