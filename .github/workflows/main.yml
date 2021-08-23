@@ -11,9 +11,4 @@ jobs:
     steps:
       - name: print comment
         run: echo "${{github.event.issue.comment}}"
-        
-      - name: Normalise command
-        run: |
-          COMMAND=${{github.event.issue.comment#"/build"}}
-          echo $COMMAND
     
