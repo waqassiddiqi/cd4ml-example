@@ -4,7 +4,7 @@ on:
   issue_comment:
     types: [created]
     
-  jobs:
+jobs:
   build:
     if: ${{ github.event.issue.pull_request }} && startsWith(github.event.issue.comment, '/build')
     runs-on: ubuntu-latest
