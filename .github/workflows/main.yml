@@ -12,6 +12,6 @@ jobs:
       - uses: hmarr/debug-action@v2
       - name: TR
         run: |
-          GITHUB_REF=$(echo ${{github.event.comment.body}} | sed -e "s#/build##g")
+          GITHUB_REF=$(echo '${{github.event.comment.body}}' | sed -e "s#/build##g")
           echo "new GITHUB_REF is $GITHUB_REF"
           echo $COMMAND
