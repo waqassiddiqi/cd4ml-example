@@ -11,5 +11,5 @@ jobs:
     steps:
       - uses: hmarr/debug-action@v2
       - name: print comment
-        run: echo "${{github.event.issue}}"
+        run: echo "${{github.event.issue.comment.body}}"
     
