@@ -12,5 +12,5 @@ jobs:
       - uses: hmarr/debug-action@v2
       - name: TR
         run: |
-          COMMAND=echo ${{github.event.comment.body}} | sed "s|/build||g"
+          COMMAND=echo '${{github.event.comment.body}}' | sed "s|/build||g"
           echo $COMMAND
