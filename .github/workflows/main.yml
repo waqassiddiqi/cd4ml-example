@@ -12,4 +12,8 @@ jobs:
       - uses: hmarr/debug-action@v2
       - name: print comment
         run: echo "${{github.event.issue.comment.body}}"
-    
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "$GITHUB_CONTEXT"
