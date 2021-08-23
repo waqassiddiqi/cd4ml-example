@@ -12,6 +12,7 @@ jobs:
       - uses: hmarr/debug-action@v2
       - name: Normalise command
         run: |
-          COMMAND=${{github.event.comment.body#"/build"}}
+          COMMENT="${{github.event.comment.body}}"
+          COMMAND=${COMMENT#"/build"}
           echo $COMMAND
       
