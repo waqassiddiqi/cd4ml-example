@@ -1,0 +1,19 @@
+name: build
+
+on:
+  issue_comment:
+    types: [created]
+    
+  jobs:
+  build:
+    if: ${{ github.event.issue.pull_request }} && startsWith(github.event.issue.comment, '/build')
+    runs-on: ubuntu-latest
+    steps:
+      - name: print comment
+        run: echo "${{github.event.issue.comment}}"
+        
+      - name: Normalise command
+        run: |
+          COMMAND=${{github.event.issue.comment#"/build"}}
+          echo $COMMAND
+    
