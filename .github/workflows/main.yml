@@ -6,12 +6,12 @@ on:
     
 jobs:
   build:
-    if: ${{ github.event.issue.pull_request }} && startsWith(github.event.issue.comment, '/build')
+    if: ${{ github.event.issue.pull_request }} && startsWith(github.event.issue.comment, '/4build')
     runs-on: ubuntu-latest
     steps:
       - uses: hmarr/debug-action@v2
       - name: print comment
-        run: echo "${{github.event.issue.comment.body}}"
+        run: echo "${{github.event.comment.body}}"
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
