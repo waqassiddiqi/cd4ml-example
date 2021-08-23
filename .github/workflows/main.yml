@@ -11,8 +11,9 @@ jobs:
     steps:
       - uses: hmarr/debug-action@v2
       - name: TR
-         COMMAND=echo $"${{github.event.comment.body}}" | tr -d '/build'
-         echo $COMMAND
+        run: |
+          COMMAND=echo $"${{github.event.comment.body}}" | tr -d '/build'
+          echo $COMMAND
          
       - name: Normalise command
         run: |
