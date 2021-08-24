@@ -11,10 +11,13 @@ jobs:
     steps:
       - uses: hmarr/debug-action@v2
       - name: Extract params
+        id: extract
         run: |
           EXPERIMENT_NAME=$(echo "${{github.event.comment.body}}" | awk -F' ' '{print $2}' | awk -F'[=]' '{print $2}')
           RUN_ID=$(echo "${{github.event.comment.body}}" | awk -F' ' '{print $3}' | awk -F'[=]' '{print $2}')
-          echo "$EXPERIMENT_NAME"
-          echo "$RUN_ID"
-          if [ -z "$EXPERIMENT_NAME"]; then echo "experiment_name is NULL"; exit 1; else echo "experiment_name is ${{ toJson(github.event.client_payload.slash_command.args.named.experiment_name) }}"; fi;
-          if [ -z "$RUN_ID"]; then echo "run_id is NULL"; exit 1; else echo "run_id is ${{ toJson(github.event.client_payload.slash_command.args.named.run_id) }}"; fi;
+          echo "::set-output experiment=$EXPERIMENT_NAME"
+          echo "::set-output experiment=$RUN_ID"
+          
+      - name: print params
+        run: |
+          echo "${{steps.extract.EXPERIMENT_NAME}}"
