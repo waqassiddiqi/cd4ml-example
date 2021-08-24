@@ -15,8 +15,8 @@ jobs:
         run: |
           EXPERIMENT_NAME=$(echo "${{github.event.comment.body}}" | awk -F' ' '{print $2}' | awk -F'[=]' '{print $2}')
           RUN_ID=$(echo "${{github.event.comment.body}}" | awk -F' ' '{print $3}' | awk -F'[=]' '{print $2}')
-          echo "::set-output name=experiment_name::$EXPERIMENT_NAME"
+          echo "::set-env name=EXPERIMENT_NAME::$EXPERIMENT_NAME"
           
       - name: print params
         run: |
-          echo "${{steps.extract.output.experiment_name}}"
+          echo "$EXPERIMENT_NAME"
