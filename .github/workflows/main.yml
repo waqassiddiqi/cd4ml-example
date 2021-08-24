@@ -6,12 +6,13 @@ on:
     
 jobs:
   build:
-    if: startsWith(github.event.comment.body, '/build')
+    if: startsWith(github.event.comment.body, '/register experiment_name')
     runs-on: ubuntu-latest
     steps:
       - uses: hmarr/debug-action@v2
-      - name: TR
+      - name: Extract params
         run: |
-          GITHUB_REF=$(echo '${{github.event.comment.body}}' | sed -e "s#/build##g")
-          echo "new GITHUB_REF is $GITHUB_REF"
-          echo $COMMAND
+          EXPERIMENT_NAME=echo '${{github.event.comment.body}}' | awk -F' ' '{print $2}' | awk -F'[=]' '{print $2}'
+          RUN_ID=echo '${{github.event.comment.body}}' | awk -F' ' '{print $3}' | awk -F'[=]' '{print $2}'
+          echo $EXPERIMENT_NAME
+          echo $RUN_ID
