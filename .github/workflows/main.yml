@@ -12,7 +12,7 @@ jobs:
       - uses: hmarr/debug-action@v2
       - name: Extract params
         run: |
-          EXPERIMENT_NAME=echo '${{github.event.comment.body}}' | awk -F' ' '{print $2}' | awk -F'[=]' '{print $2}'
-          RUN_ID=echo '${{github.event.comment.body}}' | awk -F' ' '{print $3}' | awk -F'[=]' '{print $2}'
-          echo $EXPERIMENT_NAME
-          echo $RUN_ID
+          EXPERIMENT_NAME=echo "${{github.event.comment.body}}" | awk -F' ' '{print $2}' | awk -F'[=]' '{print $2}'
+          RUN_ID=echo "${{github.event.comment.body}}" | awk -F' ' '{print $3}' | awk -F'[=]' '{print $2}'
+          echo "$EXPERIMENT_NAME"
+          echo "$RUN_ID"
